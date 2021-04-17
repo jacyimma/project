@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\UserPosts;
+use App\Models\Profile;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -45,5 +46,10 @@ class User extends \TCG\Voyager\Models\User
     public function user_posts()
     {
         return $this->hasMany(UserPosts::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserPosts::class);
     }
 }

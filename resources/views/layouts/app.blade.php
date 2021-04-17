@@ -97,16 +97,16 @@
                             
                         @endguest
                         <li>
-                                <div class="languages" style="display: flex;align-items:center">
-                                    <a class="dropdown-item add-post @if(Illuminate\Support\Facades\Session::get('locale') == 'kz') activeLang @else disactive @endif" href="{{ url('/lang/kz') }}">
-                                        <img src="https://courstore.com/lubuhom/assets/images/flags/kk.svg" alt="">
-                                    </a>
-                                    <a class="dropdown-item add-post @if(Illuminate\Support\Facades\Session::get('locale') == 'ru') activeLang @else disactive @endif" href="{{ url('/lang/ru') }}">
-                                        <img src="https://courstore.com/lubuhom/assets/images/flags/ru_RU.svg" alt="">
-                                    </a>
-                                    
-                                </div>
-                            </li>
+                            <div class="languages" style="display: flex;align-items:center">
+                                <a class="dropdown-item add-post @if(Illuminate\Support\Facades\Session::get('locale') == 'kz') activeLang @else disactive @endif" href="{{ url('/lang/kz') }}">
+                                    <img src="https://courstore.com/lubuhom/assets/images/flags/kk.svg" alt="">
+                                </a>
+                                <a class="dropdown-item add-post @if(Illuminate\Support\Facades\Session::get('locale') == 'ru') activeLang @else disactive @endif" href="{{ url('/lang/ru') }}">
+                                    <img src="https://courstore.com/lubuhom/assets/images/flags/ru_RU.svg" alt="">
+                                </a>
+                                
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
