@@ -6,6 +6,14 @@
         background:white;
         box-shadow: 0 0 5px rgba(0,0,0,0.2); */
     }
+    .container-body{
+     background:#f0f0f0;
+     height:100vh;
+     width:90%;
+     margin-left:5%;
+     border-radius:10px;
+     font-family:'SF Pro Text';
+    }
     .chat-user-list{
         width:100%;
         padding:10px;
@@ -90,9 +98,14 @@
         border-right:1px solid #dedede;
         background-color:#f8f9fa;
     }
+    .users{
+        width:100%;
+        height:100vh;
+        padding:10px;
+    }
 </style>
 @section('content')
-<div class="container">
+<div class="container-body">
 <div class="row">
 <div class="col-md-3">  
  <div class="users">
@@ -134,10 +147,10 @@
         <div class="row message align-items-center mb-2">
       <div class="col-md-12 user-info">
             <div class="chat-image">
-            {!!makeImageFromName('Rimma')!!}
+            {!!makeImageFromName($user->name)!!}
             </div>
             <div class="chat-name font-weight-bold">
-            Rimma
+           {{$user->name}}
             <span class="small time" title="2021-04-08 10:30PM">
                 10:30 PM
             </span>
@@ -180,3 +193,36 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        $(function (){
+            let user_id = "{{ auth()->user()->id }}";
+            let ip_address = '127.0.0.1';
+            let socket_port = '8005';
+            let socket = io(ip_address + ':' + socket_port);
+
+            console.log(socket)
+            
+            socket.on('connect', function() {
+               socket.on('user_connected', function(user_id){
+                   console.log(user_id);
+               });
+            });
+
+            socket.on('updateUserStatus', (data) => {
+                let $userStatusIcon = $('.user-status-icon');
+                $userStatusIcon.removeClass('text-success');
+                $userStatusIcon.attr('title', 'Away');
+                $.each(data, function (key, val) {
+                   if (val !== null && val !== 0) {
+                      let $userIcon = $(".user-icon-"+key);
+                      $userIcon.addClass('text-success');
+                      $userIcon.attr('title','Online');
+                   }
+                });
+            });
+        });
+    </script>
+@endpush

@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserMessage extends Model
 {
-    use HasFactory;
+    public function message() {
+        return $this->belongsTo(Message::class);
+    }
 }

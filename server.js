@@ -1,12 +1,13 @@
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {
+    cors: {
+      origin: '*',
+    }
+  });
 // var Redis = require('ioredis');
 // var redis = new Redis();
-
-
 var users = [];
-
 // redis.subscribe('private-channel', function() {
 //     console.log('subscribed to private channel');
 // });
@@ -22,19 +23,19 @@ var users = [];
 //     }
 // });
 io.on('connection', function (socket) {
-    console.log(111);
     socket.on("user_connected", function (user_id) {
         users[user_id] = socket.id;
+        io.emit('user_connected', user_id);
         io.emit('updateUserStatus', users);
         console.log("user connected "+ user_id);
     });
 
-    // socket.on('disconnect', function() {
-    //     var i = users.indexOf(socket.id);
-    //     users.splice(i, 1, 0);
-    //     io.emit('updateUserStatus', users);
-    //     console.log(users);
-    // });
+    socket.on('disconnect', function() {
+        var i = users.indexOf(socket.id);
+        users.splice(i, 1, 0);
+        io.emit('updateUserStatus', users);
+        console.log(users);
+    });
 });
 
 http.listen(8005, function () {
