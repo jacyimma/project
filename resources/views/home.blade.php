@@ -28,13 +28,32 @@
         </div>
         <div class="col-md-9">
             <div class="chat-select">
+                <div class="profile-section">
+                    <div class="profile-name">
+                        {{ __('page.welcome') }} {{ Auth::user()->name }}
+                    </div>
+                    <div class="profile-phone">
+                        <span>
+                            {{ App\Models\Profile::where('user_id',Auth::id())->get()[0]->phone }}
+                        </span>
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="profile-about-me">
+                        <span>
+                            {{ App\Models\Profile::where('user_id',Auth::id())->get()[0]['about-me'] }}
+                        </span>
+                        <i class="fas fa-edit"></i>
+                    </div>
+                </div>
                 <div class="post-header">
+                    
                     <h1>
                         {{ __('page.posts_section') }}
                     </h1>
                     <p>
                         {{ __('page.post_section_content') }}
                     </p>
+                    <span style="font-size: 25px">&#8595;</span>
                 </div>
                 <div class="post-container">
                     @foreach($posts as $post)

@@ -30,6 +30,21 @@ i{
 #output{
   display: none;
 }
+.profile-section{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 15px 5px;
+}
+.profile-section div{
+  cursor: pointer;
+}
+.profile-section div:hover i{
+  display: inline
+}
+.profile-section div i{
+  display: none
+}
 .modal-post-form
 p
 .upload{
