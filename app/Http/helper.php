@@ -6,6 +6,6 @@ function makeImageFromName($name){
     foreach($names as $r){
         $shortName.=$r[0];
     }
-    $userImage = '<div class="name-image bg-primary">'.$shortName.'</div>';
+    $userImage = '<div class="name-image bg-primary centeralize"><span>'.$shortName.'</span></div>';
     return $userImage;
 }

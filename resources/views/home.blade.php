@@ -1,80 +1,12 @@
 @extends('layouts.app')
-<style>
-   .container-body{
-     background:#f0f2f5;
-     height:100vh;
-     width:90%;
-     margin-left:5%;
-     border-radius:10px;
-     font-family:'SF Pro Text';
-    }
-    .chat-user-list{
-        width:100%;
-        padding:10px;
-        height:auto;  
-    }
-    .users{
-        padding:10px;
-        margin:10px;
-        background:#fcfcfc;
-        border-radius:10px;
-    }
-   .name-image{
-    border-radius: 50%;
-    height: 35px;
-    display:flex;
-    background-color:blue;
-    align-items:center;
-    justify-content:center;
-    width: 35px;
-    color:white;
-    font-sizze:17px;
-    }
-    h5{
-        font-family:'SF Pro Text';
-        font-size:20px;
-    }
-    .chat-image,.chat-name{
-        display:flex;
-        height:40px;
-        width:auto;
-        align-items:center;
-        display:inline-block !important;
-    }
-    .chat-name{
-        position: relative;
-    }
-    .fa-circle{
-        font-size:7px;
-        top:25px;
-        left:-7px;
-        position: absolute;
-        color:grey;
-    }
-    .active{
-        color:blue; 
-    }
-    .disactive{
-        color:grey;
-    }
-    .chat-select{
-        padding:10px;
-        height:95%;
-        margin:10px;
-        background:#fcfcfc;
-        border-radius:10px;
-    }
-    .col-md-9,.col-md-3{
-        height:100vh;
-    }
-    
-</style>
+
 @section('content')
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <div class="container-body">
 <div class="row chat-row">
     <div class="col-md-3">
         <div class="users">
-            <h5>Users</h5>
+            <h5>{{ __('page.users') }}</h5>
                <div class="list-group list-chat-item">
                     @if($users->count())
                         @foreach($users as $user)
@@ -84,8 +16,8 @@
                                             {!! makeImageFromName($user->name) !!}            
                                     </div>
                                     <div class="chat-name font-weight-bold">
-                                    <i class="fa fa-circle user-status-icon user-icon-{{ $user->id }}" title="away"></i>
-                                        {{ $user->name }}
+                                        <i class="fa fa-circle user-status-icon user-icon-{{ $user->id }}" title="away"></i>
+                                        <span>{{ $user->name }}</span>
                                     </div>
                                 </a>
                             </div>
@@ -95,14 +27,32 @@
             </div>
         </div>
         <div class="col-md-9">
-         <div class="chat-select">
-         <h1>
-                Message Section
-            </h1>
-            <p>
-                Select user from the list to begin conversation.
-            </p>
-         </div>
+            <div class="chat-select">
+                <div class="post-header">
+                    <h1>
+                        {{ __('page.posts_section') }}
+                    </h1>
+                    <p>
+                        {{ __('page.post_section_content') }}
+                    </p>
+                </div>
+                <div class="post-container">
+                    @foreach($posts as $post)
+                        <div class="post-inner">
+                            <div>
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span style="font-weight: 400">{{ App\Models\User::where('id',$post->user_id)->get()[0]->name }}</span>
+                            </div>
+                            <div class="post-inner-image">
+                                <img src='{{ asset("images/$post->image") }}' alt="" width="400px" height="300">
+                            </div>
+                            <div class="post-inner-text">
+                                {{ $post->content }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>            
         </div>
     </div>
     </div>

@@ -1,114 +1,15 @@
 @extends('layouts.app')
-<style>
-    .list-group{
-        /* height:auto;  
-        width:100%;
-        background:white;
-        box-shadow: 0 0 5px rgba(0,0,0,0.2); */
-    }
-    .container-body{
-     background:#f0f0f0;
-     height:100vh;
-     width:90%;
-     margin-left:5%;
-     border-radius:10px;
-     font-family:'SF Pro Text';
-    }
-    .chat-user-list{
-        width:100%;
-        padding:10px;
-        height:auto;  
-    }
-   .name-image{
-    border-radius: 50%;
-    height: 35px;
-    display:flex;
-    background-color:blue;
-    align-items:center;
-    justify-content:center;
-    width: 35px;
-    color:white;
-    font-sizze:17px;
-    }
-    .chat-image,.chat-name{
-        display:flex;
-        width:auto;
-        align-items:center;
-        display:inline-block !important;
-    }
-    .chat-image{
-        position: relative;
-    }
-    .chat-name{
-        padding-left:5px;
-    }
-    .user-status-icon{
-        font-size:8px;
-        top:29px;
-        left:27px;
-        position: absolute;
-    }
-    .active{
-        color:blue; 
-    }
-    .disactive{
-        color:grey;
-    }
-    .chat-header{
-        background:white;
-        height:50px;
-        padding:0px 10px;
-        width:100%;
-        display: flex;
-        align-items:center;
-        border:1px solid #f5f5f5;
-    }
-    .chat-body{
-        background:white;
-        height:100%;
-        width:100%;
-        padding: 10px;
-        border:1px solid #f5f5f5;
-    }
-    .time{
-        color:gray;
-    }
-    .message-text{
-        margin:-10px 0px 0px 45px;
-        padding:8px 10px;
-        width:auto;
-        max-width:300px;
-        border:1px solid #f5f5f5;
-        border-bottom-left-radius:15px;
-        border-bottom-right-radius:15px;
-        border-top-right-radius:15px;
-    }
-    .chat-input{
-        border:1px solid lightgray;
-        margin-top:2px;
-        padding:8px 10px;
-    }
-    .chat-input:focus{
-        outline:none;
-        border:1px solid lightblue;
-    }
-    .chat-input-toolbar{
-        border-bottom:1px solid #dedede;
-        border-left:1px solid #dedede;
-        border-right:1px solid #dedede;
-        background-color:#f8f9fa;
-    }
-    .users{
-        width:100%;
-        height:100vh;
-        padding:10px;
-    }
-</style>
+
 @section('content')
+<link href="{{ asset('css/conversation.css') }}" rel="stylesheet">
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <div class="container-body">
 <div class="row">
 <div class="col-md-3">  
  <div class="users">
+ <div class="back-button">
+    <a href="{{ route('home') }}">&#8592; Back to posts</a>
+ </div>
  <h5>Users</h5>
     <div  class="list-group list-chat-item">
         @if($users->count())
@@ -135,7 +36,7 @@
                 {!!makeImageFromName($user->name)!!}  
      </div>
             <span class="chat-name"> 
-                {{$user->name}}
+                {{$friendInfo->name}}
                 <i 
                 class="fa fa-circle user-status-head"
                 id="userStatushead({{$friendInfo->id}})" 
@@ -202,8 +103,6 @@
             let ip_address = '127.0.0.1';
             let socket_port = '8005';
             let socket = io(ip_address + ':' + socket_port);
-
-            console.log(socket)
             
             socket.on('connect', function() {
                socket.on('user_connected', function(user_id){
