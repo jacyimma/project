@@ -75,7 +75,7 @@ class HomeController extends Controller
 
         $object->save();
 
-        return redirect('/home');
+        return back();
     }
     public function addPost(Request $request){
         
@@ -108,6 +108,6 @@ class HomeController extends Controller
         $category = PostCategory::find($new_category);
         $post->post_categories()->attach($category);
 
-        return redirect('/home');
+        return back();
     }
 }
