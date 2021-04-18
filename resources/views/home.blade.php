@@ -28,6 +28,31 @@
         </div>
         <div class="col-md-9">
             <div class="chat-select">
+                
+                <div class="profile-modal" style="max-height: 0">
+                    <form action="{{ route('profile.edit') }}" method="POST" class="modal-post-form" enctype="multipart/form-data">
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                        @csrf
+                        <h3>
+                            {{ __('page.edit_profile') }}
+                        </h3>
+                        <label for="content">{{ __('page.phone') }}:</label>
+                        <p>
+                            <input type="text" name="phone" value="{{ App\Models\Profile::where('user_id',Auth::id())->get()[0]->phone }}">
+                        </p>
+                        <label for="image" class="upload">{{ __('page.about_me') }}:</label>
+                        <p>
+                            <textarea name="about" id="textarea" cols="20" rows="5" >{{ App\Models\Profile::where('user_id',Auth::id())->get()[0]['about-me'] }}</textarea>
+                        </p>
+                        <p>
+                            <input type="submit" class="submit-form">
+                        </p>
+                    </form>
+                </div>
                 <div class="profile-section">
                     <div class="profile-name">
                         {{ __('page.welcome') }} {{ Auth::user()->name }}
@@ -45,6 +70,7 @@
                         <i class="fas fa-edit"></i>
                     </div>
                 </div>
+                
                 <div class="post-header">
                     
                     <h1>
@@ -54,6 +80,26 @@
                         {{ __('page.post_section_content') }}
                     </p>
                     <span style="font-size: 25px">&#8595;</span>
+                    <div class="list_categories">
+                        <form action="{{ route('home') }}" method="GET" class="modal-search-form">
+                            <p>
+                                {{ __('page.search_text') }}
+                            </p>
+                            <p class="categories category_home">
+                                @foreach(App\Models\PostCategory::all() as $category)
+                                    @if(in_array($category->id,$parsed))
+                                        <span class="item deleteStatus"> <span class="item_name">{{ $category['name'] }}</span> <span class="icon">&#8722;</span></span>
+                                    @else
+                                        <span class="item"> <span class="item_name">{{ $category['name'] }}</span> <span class="icon">&#43;</span></span>
+                                    @endif
+                                @endforeach
+                            </p>
+                            @csrf
+                            <input type="hidden" value="{{ $prev }}" id="filter_post" name="categories">
+                            <input type="submit" value="{{ __('page.search_button') }}">
+                        </form>
+                    
+                    </div>
                 </div>
                 <div class="post-container">
                     @foreach($posts as $post)
@@ -79,6 +125,12 @@
 
 @push('scripts')
     <script>
+        let opened = false
+        $(".profile-section div i").click(function(e){
+            e.preventDefault();
+            opened ? $(".profile-modal").css("max-height","0") : $(".profile-modal").css("max-height","1000px");
+            opened = !opened
+        })
         $(function (){
             let user_id = "{{ auth()->user()->id }}";
             let ip_add = '127.0.0.1';

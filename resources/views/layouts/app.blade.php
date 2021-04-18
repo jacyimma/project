@@ -113,7 +113,7 @@
         </nav>
 
         <div class="modal-post" style="display: none" >
-            
+           
             <form action="{{ route('image.upload') }}" method="POST" class="modal-post-form" enctype="multipart/form-data">
                 @foreach ($errors->all() as $error)
                     <li>
@@ -130,12 +130,20 @@
                 </p>
                 <p>
                     <label for="image" class="upload"><i class="fa fa-upload"></i>{{ __('page.upload_image') }}</label>
-                    <input type="file" name="image" accept="image/gif, image/jpeg, image/png" id="image" style="visibility:hidden" onchange="loadFile(event)">
+                    <input type="file" name="image" accept="image/gif, image/jpeg, image/png" id="image" style="display:none" onchange="loadFile(event)">
                 </p>
-                <img id="output" width="100%"  height="150" style="object-fit: contain"/>	
+                <img id="output" width="100%"  height="150" style="object-fit: contain"/>
+                <label>{{ __('page.choose_category') }}:</label>	
+                <p class="categories">
+                    @foreach(App\Models\PostCategory::all() as $category)
+                        <span class="item"> <span class="item_name">{{ $category['name'] }}</span> <span class="icon">&#43;</span></span>
+                    @endforeach
+                </p>
+                <input type="hidden" value="" id="items" name="categories">
                 <p>
                     <input type="submit" class="submit-form">
                 </p>
+                
             </form>
         </div>
 
@@ -145,6 +153,53 @@
     </div>
 </body>
 <script>
+    
+    let items = document.querySelectorAll(".modal-post-form .categories .item")
+    let icons = document.querySelectorAll(".modal-post-form .categories .item .icon")
+    let item_names = document.querySelectorAll(".modal-post-form .categories .item_name")
+
+    let items2 = document.querySelectorAll(".modal-search-form .categories .item")
+    let icons2 = document.querySelectorAll(".modal-search-form .categories .item .icon")
+    let item_names2 = document.querySelectorAll(".modal-search-form .categories .item_name")
+    
+    function add_category(items, icons, item_names, targetId){
+        let deleteIcon = "&#8722;";
+        let addIcon = "&#43;"
+        let hash = {}
+        let items_add = {}
+        let target_el = document.querySelector(targetId)
+        let target_ar = target_el.value.split("")
+        if(targetId == '#filter_post')
+            for(let x = 0;x < target_ar.length;x++){
+                items_add[target_ar[x]-1] = target_ar[x]
+                hash[target_ar[x]-1] = true
+            }
+        
+        for(let x = 0;x < items.length;x++){
+            
+            items[x].addEventListener('click',function(e){
+                if(hash[x]) {
+                    icons[x].innerHTML = addIcon
+                    items[x].classList.remove("deleteStatus")
+                    delete items_add[x]
+                }
+                else {
+                    icons[x].innerHTML = deleteIcon
+                    items[x].classList.add("deleteStatus")
+                    items_add[x] = x+1
+                }
+                let parsed = Object.keys(items_add).map(key => items_add[key]).join('&')
+                console.log(items_add)
+                if(parsed != ''){
+                    target_el.value = parsed
+                }
+                hash[x] = !hash[x]
+            })
+        }
+    }
+    add_category(items,icons,item_names,"#items")
+    add_category(items2,icons2,item_names2,"#filter_post")
+    
 var loadFile = function(event) {
     document.getElementById("output").style.display = "block";
 	var image = document.getElementById('output');

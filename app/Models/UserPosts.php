@@ -14,4 +14,9 @@ class UserPosts extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function post_categories()
+    {
+        return $this->belongsToMany(PostCategory::class,'post_category_pivots','post_id', 'category_id');
+    }
 }
