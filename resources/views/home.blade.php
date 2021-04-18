@@ -54,7 +54,7 @@
                     </form>
                 </div>
                 <div class="profile-section">
-                    <div class="profile-name">
+                    <div class="profile-name" style="font-weight: 600">
                         {{ __('page.welcome') }} {{ Auth::user()->name }}
                     </div>
                     <div class="profile-phone">
