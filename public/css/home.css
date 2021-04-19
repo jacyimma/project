@@ -4,7 +4,7 @@
     width:90%;
     margin-left:5%;
     border-radius:0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SF Pro Text', sans-serif;
 }
 img{
     object-fit: contain;
@@ -33,9 +33,11 @@ img{
     height:auto;  
 }
 .chat-image div{
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius:50%;
+    color:white;
+    font-weight: SF Pro Text;
 }
 .chat-name{
     margin-left: 10px;
@@ -63,7 +65,7 @@ te
     font-size: 17px;
 }
 h5{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SF Pro Text', sans-serif;
     font-size:17px;
 }
 .chat-image,.chat-name{
@@ -75,10 +77,10 @@ h5{
     position: relative;
 }
 .fa-circle{
-    font-size:7px;
-    /* top:25px;
-    left:-7px;
-    position: absolute; */
+    font-size:10px;
+    top:28px;
+    left:-15px;
+    position: absolute;
     color:grey;
 }
 .active{

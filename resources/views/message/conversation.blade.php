@@ -18,9 +18,9 @@
             <a href="{{route('message.conversation',$user->id)}}">
             <div class="chat-image">
                 {!!makeImageFromName($user->name)!!}  
-                <i class="fa fa-circle user-status-icon @if($user->id == $friendInfo->id) active @else disactive  @endif"></i>   
             </div>
             <span class="chat-name"> 
+            <i class="fa fa-circle user-status-icon @if($user->id == $friendInfo->id) active @else disactive  @endif"></i>   
                 {{$user->name}}
               </span>
             </a>
@@ -33,14 +33,10 @@
  <div class="col-md-9 chat">
      <div class="chat-header">
      <div class="chat-image">
-                {!!makeImageFromName($user->name)!!}  
+                {!!makeImageFromName($friendInfo->name)!!}  
      </div>
             <span class="chat-name"> 
-                {{$friendInfo->name}}
-                <i 
-                class="fa fa-circle user-status-head"
-                id="userStatushead({{$friendInfo->id}})" 
-                title="away"></i>   
+                {{$friendInfo->name}} 
               </span>
      </div>
      <div class="chat-body">
@@ -48,10 +44,10 @@
         <div class="row message align-items-center mb-2">
       <div class="col-md-12 user-info">
             <div class="chat-image">
-            {!!makeImageFromName($user->name)!!}
+            {!!makeImageFromName($friendInfo->name)!!}
             </div>
             <div class="chat-name font-weight-bold">
-           {{$user->name}}
+            {{$friendInfo->name}} 
             <span class="small time" title="2021-04-08 10:30PM">
                 10:30 PM
             </span>

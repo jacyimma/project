@@ -15,7 +15,7 @@
                                     <div class="chat-image">
                                             {!! makeImageFromName($user->name) !!}            
                                     </div>
-                                    <div class="chat-name font-weight-bold">
+                                    <div class="chat-name">
                                         <i class="fa fa-circle user-status-icon user-icon-{{ $user->id }}" title="away"></i>
                                         <span>{{ $user->name }}</span>
                                     </div>
@@ -30,7 +30,7 @@
             <div class="chat-select">
                 
                 <div class="profile-modal" style="max-height: 0">
-                    <form action="{{ route('profile.edit') }}" method="POST" class="modal-post-form" enctype="multipart/form-data">
+                    <form action="{{ url('edit') }}" method="POST" class="modal-post-form" enctype="multipart/form-data">
                         @foreach ($errors->all() as $error)
                             <li>
                                 {{ $error }}

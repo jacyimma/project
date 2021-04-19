@@ -23,12 +23,12 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('conversation/{userId}', 'MessageController@conversation')
 //     ->name('message.conversation');
+Route::post('edit',  [App\Http\Controllers\HomeController::class, 'savePostCategory'])->name('men.edit');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 Route::get('/conversation/{userId}', [App\Http\Controllers\MessageController::class, 'index'])->name('message.conversation');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('image-upload',  [App\Http\Controllers\HomeController::class, 'addPost'])->name('image.upload');
-Route::post('profile-edit',  [App\Http\Controllers\HomeController::class, 'editProfile'])->name('profile.edit');
 Route::get('/lang/{locale}', function ($locale){
     
     Session::put('locale', $locale);

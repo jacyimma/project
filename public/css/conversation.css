@@ -6,7 +6,7 @@
 }
 .container-body{
     background:#f0f0f0;
-    height:100vh;
+    height:90%;
     width:90%;
     margin-left:5%;
     border-radius:10px;
@@ -29,7 +29,7 @@ align-items:center;
 justify-content:center;
 width: 35px;
 color:white;
-font-sizze:17px;
+font-size:17px;
 }
 .chat-image,.chat-name{
     display:flex;
@@ -43,11 +43,12 @@ font-sizze:17px;
 .chat-name{
     padding-left:5px;
 }
-.user-status-icon{
-    font-size:8px;
-    top:29px;
-    left:27px;
+.fa-circle{
+    font-size:10px;
+    top:28px;
+    left:-15px;
     position: absolute;
+    color:grey;
 }
 .active{
     color:blue; 
@@ -57,18 +58,23 @@ font-sizze:17px;
 }
 .chat-header{
     background:white;
-    height:50px;
+    height:7%;
     padding:0px 10px;
-    width:100%;
+    width:96%;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    margin-left: 2%;
+    margin-top: 10px;
     display: flex;
     align-items:center;
     border:1px solid #f5f5f5;
 }
 .chat-body{
     background:white;
-    height:90%;
-    width:100%;
+    height:77%;
+    width:96%;
     padding: 10px;
+    margin-left: 2%;
     border:1px solid #f5f5f5;
 }
 .time{
@@ -88,6 +94,8 @@ font-sizze:17px;
     border:1px solid lightgray;
     margin-top:2px;
     padding:8px 10px;
+    width:96%;
+    margin-left: 2%;
 }
 .chat-input:focus{
     outline:none;
@@ -98,9 +106,14 @@ font-sizze:17px;
     border-left:1px solid #dedede;
     border-right:1px solid #dedede;
     background-color:#f8f9fa;
+    width:96%;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    margin-left: 2%;
+    padding-left: 20px;
 }
 .users{
     width:100%;
-    height:100vh;
+    height:95vh;
     padding:10px;
 }

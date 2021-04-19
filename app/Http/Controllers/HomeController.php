@@ -63,7 +63,16 @@ class HomeController extends Controller
         return view('home',$this->data);
     }
     public function savePostCategory(Request $request){
+        $phone = $request->get('phone');
+        $about = $request->get('about');
+        
+        $object = Profile::where("user_id",Auth::id())->first();
+        $object["phone"] = $phone;
+        $object["about-me"] = $about;
 
+        $object->save();
+
+        return back();
     }
     public function editProfile(Request $request){
         $phone = $request->get('phone');
